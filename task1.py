@@ -7,6 +7,21 @@ class SinglyLinkedList:
     def __init__(self):
         self.head = None
 
+    def insert_at_beginning(self, data):
+        new_node = ListNode(data)
+        new_node.next_node = self.head
+        self.head = new_node
+
+    def insert_at_end(self, data):
+        new_node = ListNode(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next_node:
+                current = current.next_node
+            current.next_node = new_node
+
     def reverse(self):
         prev = None
         current = self.head
@@ -70,13 +85,22 @@ class SinglyLinkedList:
 
 # Приклад використання:
 sll = SinglyLinkedList()
-sll.head = ListNode(4)
-sll.head.next_node = ListNode(2)
-sll.head.next_node.next_node = ListNode(1)
-sll.head.next_node.next_node.next_node = ListNode(3)
 
-print("Початковий список:")
+# Вставляємо вузли в кінець списку
+sll.insert_at_end(1)
+sll.insert_at_end(2)
+sll.insert_at_end(3)
+
+print("Список після вставки в кінець:")
 sll.print_list()
+
+# Вставляємо вузли на початок списку
+sll.insert_at_beginning(77)
+sll.insert_at_beginning(5)
+
+print("Список після вставки на початок:")
+sll.print_list()
+
 
 # Реверсуємо список
 sll.reverse()
@@ -90,14 +114,17 @@ sll.print_list()
 
 # Створюємо два відсортованих списки
 sll1 = SinglyLinkedList()
-sll1.head = ListNode(1)
-sll1.head.next_node = ListNode(3)
-sll1.head.next_node.next_node = ListNode(5)
+sll1.insert_at_end(1)
+sll1.insert_at_end(2)
+sll1.insert_at_end(3)
 
 sll2 = SinglyLinkedList()
-sll2.head = ListNode(2)
-sll2.head.next_node = ListNode(4)
-sll2.head.next_node.next_node = ListNode(6)
+sll2.insert_at_beginning(0)
+sll2.insert_at_beginning(7)
+
+# Сортуємо списки
+sll1.insertion_sort()
+sll2.insertion_sort()
 
 # Об'єднуємо відсортовані списки
 print("Об'єднання двох відсортованих списків:")
@@ -105,5 +132,6 @@ merged_head = sll.merge_sorted_lists(sll1.head, sll2.head)
 merged_list = SinglyLinkedList()
 merged_list.head = merged_head
 merged_list.print_list()
+
 
 
